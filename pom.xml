@@ -14,8 +14,10 @@
 	<name>springboot2-essestials</name>
 	<description>Curso de Spring Boot do DevDojo</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
+		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+		<lombok.version>1.18.16</lombok.version>
 	</properties>
 	<dependencies>
 
@@ -105,7 +107,11 @@
 							<artifactId>lombok</artifactId>
 							<version>${lombok.version}</version>
 						</path>
-						<!-- other annotation processors -->
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok-mapstruct-binding</artifactId>
+							<version>0.1.0</version>
+						</path>
 					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
