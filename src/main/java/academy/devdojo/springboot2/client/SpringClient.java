@@ -3,6 +3,7 @@ package academy.devdojo.springboot2.client;
 import academy.devdojo.springboot2.domain.Livro;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
@@ -30,5 +31,16 @@ public class SpringClient {
         //@formatter:on
         log.info(exchange.getBody());
 
+
+        /*Livro kingdom = Livro.builder().name("Kingdom").build();
+        Livro kingdomSaved = new RestTemplate().postForObject("http://localhost:8080/livros/", kingdom, Livro.class);
+        log.info("saved livro {}", kingdomSaved);*/
+
+        Livro magicodeoz = Livro.builder().name("Mágico de OZ").build();
+        ResponseEntity<Livro> magicodeozSaved = new RestTemplate().exchange("http://localhost:8080/livros/",
+                HttpMethod.POST,
+                new HttpEntity<>(magicodeoz),
+                Livro.class);
+        log.info("saved livro {}", magicodeozSaved);
     }
 }
