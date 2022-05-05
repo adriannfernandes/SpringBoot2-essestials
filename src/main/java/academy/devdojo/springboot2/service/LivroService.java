@@ -7,10 +7,10 @@ import academy.devdojo.springboot2.repository.LivroRepository;
 import academy.devdojo.springboot2.requests.LivroPostRequestBody;
 import academy.devdojo.springboot2.requests.LivroPutRequestBody;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -23,8 +23,8 @@ public class LivroService {
     private final LivroRepository livroRepository;
 
 
-    public List<Livro> listAll(){
-        return livroRepository.findAll();
+    public Page<Livro> listAll(Pageable pageable){
+        return livroRepository.findAll(pageable);
     }
 
     public List<Livro> findByName(String name){

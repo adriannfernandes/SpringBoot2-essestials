@@ -7,6 +7,8 @@ import academy.devdojo.springboot2.service.LivroService;
 import academy.devdojo.springboot2.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,9 +30,9 @@ public class LivroController {
     private final LivroService livroService;
 
     @GetMapping
-    public ResponseEntity<List<Livro>> list(){
+    public ResponseEntity<Page<Livro>> list(Pageable pageable){
         log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
-        return ResponseEntity.ok(livroService.listAll());
+        return ResponseEntity.ok(livroService.listAll(pageable));
     }
 
     @GetMapping(path = "/{id}")
