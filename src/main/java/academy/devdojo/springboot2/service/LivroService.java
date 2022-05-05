@@ -22,14 +22,17 @@ public class LivroService {
 
     private final LivroRepository livroRepository;
 
-
     public Page<Livro> listAll(Pageable pageable){
         return livroRepository.findAll(pageable);
     }
 
+    public List<Livro> listAllNonPageable() {
+        return livroRepository.findAll();
+    }
     public List<Livro> findByName(String name){
         return livroRepository.findByName(name);
     }
+
     public Livro findByIdOrThrowBadRequestException(long id){
         return livroRepository.findById(id)
                 .orElseThrow(()-> new BadRequestException("Livro Not Found"));

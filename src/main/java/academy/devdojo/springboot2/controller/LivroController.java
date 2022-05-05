@@ -35,6 +35,12 @@ public class LivroController {
         return ResponseEntity.ok(livroService.listAll(pageable));
     }
 
+    @GetMapping(path = "/all")
+    public ResponseEntity<List<Livro>> listAll(){
+        log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+        return ResponseEntity.ok(livroService.listAllNonPageable());
+    }
+
     @GetMapping(path = "/{id}")
     public ResponseEntity<Livro> findById(@PathVariable long id){
         return ResponseEntity.ok(livroService.findByIdOrThrowBadRequestException(id));
