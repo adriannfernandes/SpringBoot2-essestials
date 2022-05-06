@@ -3,9 +3,7 @@ package academy.devdojo.springboot2.client;
 import academy.devdojo.springboot2.domain.Livro;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -39,8 +37,32 @@ public class SpringClient {
         Livro magicodeoz = Livro.builder().name("Mágico de OZ").build();
         ResponseEntity<Livro> magicodeozSaved = new RestTemplate().exchange("http://localhost:8080/livros/",
                 HttpMethod.POST,
-                new HttpEntity<>(magicodeoz),
+                new HttpEntity<>(magicodeoz, createJsonHeader()),
                 Livro.class);
         log.info("saved livro {}", magicodeozSaved);
+
+        Livro livroToBeUpdated = magicodeozSaved.getBody();
+        livroToBeUpdated.setName("Mágico de OZ : Renascer");
+
+        ResponseEntity<Void> magicodeozUpdated = new RestTemplate().exchange("http://localhost:8080/livros/",
+                HttpMethod.PUT,
+                new HttpEntity<>(livroToBeUpdated, createJsonHeader()),
+                Void.class);
+
+        log.info(magicodeozUpdated);
+
+        ResponseEntity<Void> magicodeozDelete = new RestTemplate().exchange("http://localhost:8080/livros/{id}",
+                HttpMethod.DELETE,
+                null,
+                Void.class,
+                livroToBeUpdated.getId());
+
+        log.info(magicodeozDelete);
+    }
+
+    private static HttpHeaders createJsonHeader(){
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        return httpHeaders;
     }
 }
