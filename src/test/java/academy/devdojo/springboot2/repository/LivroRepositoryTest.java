@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import javax.validation.ConstraintViolationException;
 import java.util.List;
 import java.util.Optional;
 
@@ -86,9 +87,10 @@ class LivroRepositoryTest {
 
         List<Livro> foundLivros = this.livroRepository.findByName(name);
 
-        Assertions.assertThat(foundLivros).isNotEmpty();
+        Assertions.assertThat(foundLivros)
+                .isNotEmpty()
+                .contains(livroSaved);
 
-        Assertions.assertThat(foundLivros).contains(livroSaved);
 
     }
 
@@ -101,6 +103,14 @@ class LivroRepositoryTest {
         Assertions.assertThat(foundLivros).isEmpty();
 
     }
+    @Test
+    @DisplayName("Save throw ConstraintViolationException when name is empty")
+    void save_ThrowConstraintViolationException_WhenNameIsEmpty(){
+        Livro livro = new Livro();
+        Assertions.assertThatThrownBy(() -> this.livroRepository.save(livro))
+                .isInstanceOf(ConstraintViolationException.class);
+    }
+
 
     private Livro createLivro(){
 
