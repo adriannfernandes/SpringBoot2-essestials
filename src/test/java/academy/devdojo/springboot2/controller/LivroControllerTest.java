@@ -170,8 +170,6 @@ class LivroControllerTest {
 
         Assertions.assertThat(entity.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
 
-
-
     }
 
 }
