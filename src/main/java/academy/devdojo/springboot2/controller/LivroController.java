@@ -26,18 +26,16 @@ import java.util.List;
 // Classe Controller é aonde vai estar os EndPoints
 public class LivroController {
 
-    private final DateUtil dateUtil;
     private final LivroService livroService;
 
     @GetMapping
     public ResponseEntity<Page<Livro>> list(Pageable pageable){
-        log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
+
         return ResponseEntity.ok(livroService.listAll(pageable));
     }
 
     @GetMapping(path = "/all")
     public ResponseEntity<List<Livro>> listAll(){
-        log.info(dateUtil.formatLocalDateTimeToDatabaseStyle(LocalDateTime.now()));
         return ResponseEntity.ok(livroService.listAllNonPageable());
     }
 

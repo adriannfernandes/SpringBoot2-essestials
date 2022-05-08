@@ -1,6 +1,7 @@
 package academy.devdojo.springboot2.repository;
 
 import academy.devdojo.springboot2.domain.Livro;
+import academy.devdojo.springboot2.util.LivroCreator;
 import ch.qos.logback.core.net.AbstractSSLSocketAppender;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -26,7 +27,7 @@ class LivroRepositoryTest {
     @DisplayName("Save persists livro when sucessful")
     void save_PersistLivro_WhenSucessful(){
 
-        Livro livroToBeSaved = createLivro();
+        Livro livroToBeSaved = LivroCreator.createLivroToBeSaved();
 
         Livro livroSaved = this.livroRepository.save(livroToBeSaved);
 
@@ -43,7 +44,7 @@ class LivroRepositoryTest {
     @DisplayName("Save updates livro when sucessful")
     void save_UpdatesLivro_WhenSucessful(){
 
-        Livro livroToBeSaved = createLivro();
+        Livro livroToBeSaved = LivroCreator.createLivroToBeSaved();
 
         Livro livroSaved = this.livroRepository.save(livroToBeSaved);
 
@@ -63,7 +64,7 @@ class LivroRepositoryTest {
     @DisplayName("Delete removes livro when sucessful")
     void delete_RemovesLivro_WhenSucessful(){
 
-        Livro livroToBeSaved = createLivro();
+        Livro livroToBeSaved = LivroCreator.createLivroToBeSaved();
 
         Livro livroSaved = this.livroRepository.save(livroToBeSaved);
 
@@ -79,7 +80,7 @@ class LivroRepositoryTest {
     @DisplayName("Find By Name returns list of livro when sucessful")
     void findByName_ReturnsListOfLivro_WhenSucessful(){
 
-        Livro livroToBeSaved = createLivro();
+        Livro livroToBeSaved = LivroCreator.createLivroToBeSaved();
 
         Livro livroSaved = this.livroRepository.save(livroToBeSaved);
 
@@ -111,11 +112,4 @@ class LivroRepositoryTest {
                 .isInstanceOf(ConstraintViolationException.class);
     }
 
-
-    private Livro createLivro(){
-
-        return Livro.builder()
-                .name("Cidade de Papel")
-                .build();
-    }
 }
