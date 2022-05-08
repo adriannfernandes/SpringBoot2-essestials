@@ -92,7 +92,6 @@ class LivroRepositoryTest {
                 .isNotEmpty()
                 .contains(livroSaved);
 
-
     }
 
     @Test
@@ -110,6 +109,11 @@ class LivroRepositoryTest {
         Livro livro = new Livro();
         Assertions.assertThatThrownBy(() -> this.livroRepository.save(livro))
                 .isInstanceOf(ConstraintViolationException.class);
+
+       Assertions.assertThatExceptionOfType(ConstraintViolationException.class)
+               .isThrownBy(() -> this.livroRepository.save(livro))
+               .withMessage("The livro name cannot be empty");
     }
+
 
 }

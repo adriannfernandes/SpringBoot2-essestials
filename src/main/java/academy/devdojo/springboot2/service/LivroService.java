@@ -38,7 +38,6 @@ public class LivroService {
                 .orElseThrow(()-> new BadRequestException("Livro Not Found"));
     }
 
-
     @Transactional
     public Livro save(LivroPostRequestBody livroPostRequestBody) {
         return livroRepository.save(LivroMapper.INSTANCE.toLivro(livroPostRequestBody));
