@@ -110,7 +110,7 @@ class LivroServiceTest {
 
         Assertions.assertThatExceptionOfType(BadRequestException.class)
                 .isThrownBy(() -> livroService.findByIdOrThrowBadRequestException(1));
-        
+
     }
 
     @Test
