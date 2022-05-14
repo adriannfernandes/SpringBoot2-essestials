@@ -16,7 +16,7 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 @Entity
 @Builder
-//Class Domain é o que temos do Banco de Dados
+//Class Domain é o que vamos ter do Banco de Dados
 public class Livro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
