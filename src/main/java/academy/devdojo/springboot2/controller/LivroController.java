@@ -46,7 +46,6 @@ public class LivroController {
     }
 
     @GetMapping(path = "by-id/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Livro> findByIdAuthenticationPrincipal(@PathVariable long id,
                                                                  @AuthenticationPrincipal UserDetails userDetails){
         log.info(userDetails);
@@ -59,12 +58,11 @@ public class LivroController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Livro> save(@RequestBody @Valid LivroPostRequestBody livroPostRequestBody){
         return new ResponseEntity<Livro>(livroService.save(livroPostRequestBody), HttpStatus.CREATED);
     }
 
-    @DeleteMapping(path = "/{id}")
+    @DeleteMapping(path = "/admin/{id}")
     public ResponseEntity<Livro> delete(@PathVariable long id){
         livroService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
