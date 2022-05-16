@@ -4,7 +4,6 @@ import academy.devdojo.springboot2.domain.Livro;
 import academy.devdojo.springboot2.requests.LivroPostRequestBody;
 import academy.devdojo.springboot2.requests.LivroPutRequestBody;
 import academy.devdojo.springboot2.service.LivroService;
-import academy.devdojo.springboot2.util.DateUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -17,7 +16,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -48,6 +46,7 @@ public class LivroController {
     }
 
     @GetMapping(path = "by-id/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Livro> findByIdAuthenticationPrincipal(@PathVariable long id,
                                                                  @AuthenticationPrincipal UserDetails userDetails){
         log.info(userDetails);
