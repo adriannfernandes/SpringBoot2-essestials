@@ -4,8 +4,10 @@ import academy.devdojo.springboot2.domain.Livro;
 import academy.devdojo.springboot2.requests.LivroPostRequestBody;
 import academy.devdojo.springboot2.requests.LivroPutRequestBody;
 import academy.devdojo.springboot2.service.LivroService;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -30,7 +32,7 @@ public class LivroController {
     private final LivroService livroService;
 
     @GetMapping
-    public ResponseEntity<Page<Livro>> list(Pageable pageable){
+    public ResponseEntity<Page<Livro>> list(@ParameterObject Pageable pageable){
         return ResponseEntity.ok(livroService.listAll(pageable));
     }
 
