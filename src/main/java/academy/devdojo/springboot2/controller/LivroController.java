@@ -4,7 +4,10 @@ import academy.devdojo.springboot2.domain.Livro;
 import academy.devdojo.springboot2.requests.LivroPostRequestBody;
 import academy.devdojo.springboot2.requests.LivroPutRequestBody;
 import academy.devdojo.springboot2.service.LivroService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springdoc.api.annotations.ParameterObject;
@@ -32,6 +35,8 @@ public class LivroController {
     private final LivroService livroService;
 
     @GetMapping
+    @Operation(summary = "List all Livros paginated", description = "The default size is 20, use the parameter size to change the default value",
+    tags = {"livro"})
     public ResponseEntity<Page<Livro>> list(@ParameterObject Pageable pageable){
         return ResponseEntity.ok(livroService.listAll(pageable));
     }
@@ -64,6 +69,10 @@ public class LivroController {
     }
 
     @DeleteMapping(path = "/admin/{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Successful Operation"),
+            @ApiResponse(responseCode = "400", description = "When the Livro Does Not Exist in The Database")
+    })
     public ResponseEntity<Livro> delete(@PathVariable long id){
         livroService.delete(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
