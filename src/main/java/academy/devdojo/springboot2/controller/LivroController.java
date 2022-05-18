@@ -31,7 +31,6 @@ public class LivroController {
 
     @GetMapping
     public ResponseEntity<Page<Livro>> list(Pageable pageable){
-
         return ResponseEntity.ok(livroService.listAll(pageable));
     }
 
@@ -59,7 +58,7 @@ public class LivroController {
 
     @PostMapping
     public ResponseEntity<Livro> save(@RequestBody @Valid LivroPostRequestBody livroPostRequestBody){
-        return new ResponseEntity<Livro>(livroService.save(livroPostRequestBody), HttpStatus.CREATED);
+        return new ResponseEntity<>(livroService.save(livroPostRequestBody), HttpStatus.CREATED);
     }
 
     @DeleteMapping(path = "/admin/{id}")

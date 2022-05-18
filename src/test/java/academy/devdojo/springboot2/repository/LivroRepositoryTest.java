@@ -107,12 +107,14 @@ class LivroRepositoryTest {
     @DisplayName("Save throw ConstraintViolationException when name is empty")
     void save_ThrowConstraintViolationException_WhenNameIsEmpty(){
         Livro livro = new Livro();
-        Assertions.assertThatThrownBy(() -> this.livroRepository.save(livro))
-                .isInstanceOf(ConstraintViolationException.class);
+
+
+//        Assertions.assertThatThrownBy(() -> this.livroRepository.save(livro))
+//                .isInstanceOf(ConstraintViolationException.class);
 
        Assertions.assertThatExceptionOfType(ConstraintViolationException.class)
                .isThrownBy(() -> this.livroRepository.save(livro))
-               .withMessage("The livro name cannot be empty");
+               .withMessageContaining("The livro name cannot be empty");
     }
 
 
