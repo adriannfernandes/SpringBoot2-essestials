@@ -3,6 +3,8 @@ server:
     include-stacktrace: on_param
 
 spring:
+  application:
+    name: springboot2-essestials
   datasource:
     url: jdbc:mysql://localhost:3306/livro?createDatabaseIfNotExist=true
     username: root
