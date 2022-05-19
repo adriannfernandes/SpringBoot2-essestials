@@ -16,3 +16,16 @@ logging:
     org:
       hibernate:
         SQL: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  info:
+    env:
+      enabled: true
+info:
+  app: SpringBoot2 Essestials By DevDojo
+  website: https://devdojo.academy
+  github: https://github.com/adriannfernandes/SpringBoot2-essestials
