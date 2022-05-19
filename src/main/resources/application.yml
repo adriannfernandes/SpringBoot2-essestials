@@ -21,10 +21,8 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
-  info:
-    env:
-      enabled: true
+        include: info, health, metrics, prometheus
+
 info:
   app: SpringBoot2 Essestials By DevDojo
   website: https://devdojo.academy
